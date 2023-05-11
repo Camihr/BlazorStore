@@ -28,6 +28,7 @@ namespace AdaStore.Api.Controllers
             var claims = new List<Claim>()
             {
                 new Claim("Email", user.Email),
+                new Claim("Name", user.Name),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("JwtKey")));

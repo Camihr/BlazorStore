@@ -40,9 +40,8 @@ namespace AdaStore.UI.Shared
                     CurrentUser.Profile = role;
                 }
 
-                // CurrentUser.Id = Convert.ToInt32(user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-                CurrentUser.Email = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
-                //CurrentUser.Name = user.Claims.FirstOrDefault(c => c.Type == "DisplayName").Value;
+                CurrentUser.Email = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+                CurrentUser.Name = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
 
                 var uri = Navigation.Uri;
                 var absoluteUri = Navigation.ToAbsoluteUri(uri);

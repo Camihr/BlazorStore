@@ -54,7 +54,7 @@ namespace AdaStore.Api.Controllers
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(newUser, Conts.Buyer);
-                return Ok(GenerateTokenAuth(new UserClaims() { Email = newUser.Email }));
+                return Ok(GenerateTokenAuth(new UserClaims() { Name = newUser.Name, Email = newUser.Email }));
             }
             else
             {
@@ -72,9 +72,11 @@ namespace AdaStore.Api.Controllers
                 isPersistent: credential.IsPersistent,
                 lockoutOnFailure: false);
 
+            var user = await GetUser();
+
             if (result.Succeeded)
             {
-                var authResponse = GenerateTokenAuth(new UserClaims() { Email = credential.Email });
+                var authResponse = GenerateTokenAuth(new UserClaims() { Name = user.Name, Email = user.Email });
                 return Ok(authResponse);
             }
             else
