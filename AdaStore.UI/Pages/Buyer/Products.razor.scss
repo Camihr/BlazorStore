@@ -1,0 +1,73 @@
+﻿@import '../../wwwroot/css/_vars.scss';
+
+@function min($numbers...) {
+    @return m#{i}n(#{$numbers});
+}
+
+#grid-products {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 20px;
+    grid-auto-rows: 350px;
+    grid-auto-flow: dense;
+
+    .product {
+        width: 100%;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 2px 2px 8px 0 rgba(0,0,0,.12);
+        @include flex-column-start;
+
+        .image-product {
+            width: 100%;
+            height: 300px;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            background-position: center !important;
+        }
+
+        .body-product {
+            width: 100%;
+            height: 100%;
+            @include flex-column-space;
+
+            .info-basic-product {
+                padding: 0 12px;
+            }
+
+            .actions-produc {
+                @include flex-spaceb-center;
+                padding: 12px;
+
+                .more-button {
+                    color: white;
+                    height: 22px;
+                    width: 90px;
+                    @include flex-center-center;
+                    background: $primary;
+                    border-radius: 11px;
+                }
+
+                .add-cart-circle {
+                    @include flex-center-center;
+                    width: 40px;
+                    height: 40px;
+                    background: $success;
+                    border-radius: 50%;
+
+                    ::deep svg {
+                        width: 20px;
+                        height: 20px;
+                        fill: white;
+                    }
+                }
+
+                .exhausted {
+                    color: $danger;
+                }
+            }
+        }
+    }
+}

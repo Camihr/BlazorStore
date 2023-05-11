@@ -1,0 +1,17 @@
+﻿@using AdaStore.Shared.Conts;
+<header>
+    <div id="title">
+        <a id="logo" class='@(_isMenuClosed ? "logo-min": string.Empty)'></a>
+        <a @onclick="ToogleSideBar">
+            <Icon Name="Icons.IconMenu" />
+        </a>
+        <h1 id="page-title">@Title</h1>
+    </div>
+    <div id="header-options">
+        <LoginDisplay />
+      <AuthorizeView Roles="@Conts.Buyer">
+            <CartIndicator QuantityItems="QuantityItems" />
+      </AuthorizeView>
+    </div>
+</header>
+ 

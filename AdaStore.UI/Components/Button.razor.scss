@@ -1,0 +1,56 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+$lighten: 5%;
+
+.btn {
+    cursor: pointer;
+    @include flex-center-center;
+    height: 32px;
+    padding: 0 14px;
+    white-space: nowrap;
+    border-radius: 5px;
+    color: white;
+    font-weight: 300;
+    transition: all .2s ease-in;
+
+    &.disabled {
+        opacity: 0.5;
+    }
+
+    &.btn-primary {
+        background: $primary;
+
+        &.btn:hover {
+            background: lighten($primary, $lighten);
+        }
+    }
+
+    &.btn-secondary {
+        background: $secondary;
+
+        &.btn:hover {
+            background: lighten($secondary, $lighten);
+        }
+    }
+
+    &.btn-default {
+        background: $gray2;
+
+        &.btn:hover {
+            background: lighten($gray2, $lighten);
+        }
+    }
+
+    &.btn-danger {
+        background: $danger;
+
+        &.btn:hover {
+            background: lighten($danger, $lighten);
+        }
+    }
+
+    &.btn-full {
+        width: 100%;
+        padding: 0;
+    }
+}

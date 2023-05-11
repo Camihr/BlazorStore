@@ -1,0 +1,14 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+#main {
+    height: calc(100% - 50px);
+    display: flex;
+    background: $gray4;
+
+    #wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px 15px 0 15px;
+        overflow: auto;
+    }
+}

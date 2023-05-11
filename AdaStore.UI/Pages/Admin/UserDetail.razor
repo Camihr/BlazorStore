@@ -1,0 +1,26 @@
+﻿<div id="user-detail">
+    <div class="user-info">
+        <span>Nombre:</span>
+        <p>@User.Name</p>
+    </div>
+    <div class="user-info">
+        <span>Correo electrónico:</span>
+        <p>@User.Email</p>
+    </div>
+    <div class="user-info">
+        <span>Teléfono:</span>
+        <p>@User.PhoneNumber</p>
+    </div>
+    <div class="user-info">
+        <span>Dirección:</span>
+        <p>@User.Address</p>
+    </div>
+     <div class="user-info">
+        <span>Documento:</span>
+        <p>@User.Document</p>
+    </div>
+</div>
+
+@code {
+    [Parameter] public User User { get; set; }
+}

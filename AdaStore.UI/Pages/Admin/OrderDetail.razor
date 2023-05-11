@@ -1,0 +1,24 @@
+﻿<div id="order-detail">
+    @foreach (var item in Order.CartItems)
+    {
+        <div class="cart-item">
+            <div class="left-part">
+                <div class="image-product" style="background-image: url(@item.Product.ImageUrl);"></div>
+                <p>@item.Product.Name</p>
+            </div>
+            <div class="right-part">
+                <div>
+                    <p>@item.Quantity x  @item.Product.Price.MoneyFormat()</p>
+                    <h4>@item.Total.MoneyFormat()</h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="footer-order">
+        <h2>@Order.Total.MoneyFormat()</h2>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Order Order { get; set; }
+}

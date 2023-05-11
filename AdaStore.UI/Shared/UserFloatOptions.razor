@@ -1,0 +1,13 @@
+﻿@inject NavigationManager Navigation
+
+<div class="over-close" @onclick="Close"></div>
+<div id="user-float-options">
+    <NavLink href="/logout">
+        <Icon Name="Icons.IconLogout" />
+        Salir
+    </NavLink>
+</div> 
+
+@code{
+    [Parameter] public EventCallback Close { get; set; }
+}

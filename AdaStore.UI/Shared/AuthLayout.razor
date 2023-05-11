@@ -1,0 +1,18 @@
+﻿@inherits LayoutComponentBase
+
+<CascadingValue Value="this">
+    <div id="auth-wrapper">
+        <img class="auth-logo" src="img/logo.png" alt="Logo" />
+        <div class="auth-header-line"></div>
+        @Body
+    </div>
+</CascadingValue>
+
+@if (_showLoading)
+{
+    <Loader />
+}
+@if (_showAlert)
+{
+    <Alert Info="_alertInfo" Close="()=> _showAlert = false" />
+}

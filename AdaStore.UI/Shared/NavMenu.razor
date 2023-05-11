@@ -1,0 +1,37 @@
+﻿@using AdaStore.Shared.Conts;
+<nav id="nav" class='@(IsMenuClosed ? "nav-min" : string.Empty)'>
+    <ul>
+        <AuthorizeView Roles="@Conts.Admin">
+            <li>
+                <NavLink href="/admin/transactions">
+                    <Icon Name="Icons.Transactions" />
+                    <span>
+                        Transacciones
+                    </span>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink href="/admin/products">
+                    <Icon Name="Icons.Products" />
+                    <span>
+                        Productos
+                    </span>
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="@Conts.Buyer">
+            <li>
+                <NavLink href="/products">
+                    <Icon Name="Icons.Products" />
+                    <span>
+                        Productos
+                    </span>
+                </NavLink>
+            </li>
+        </AuthorizeView>
+    </ul>
+</nav>
+
+@code {
+    [Parameter] public bool IsMenuClosed { get; set; }
+}

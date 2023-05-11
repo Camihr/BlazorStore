@@ -1,0 +1,18 @@
+﻿@import '../../wwwroot/css/_vars.scss';
+
+#user-detail {
+    .user-info {
+        border-bottom: 1px solid $gray4;
+        padding: 8px 0;
+
+        span {
+            font-size: .8rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+}

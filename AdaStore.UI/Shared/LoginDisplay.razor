@@ -1,0 +1,17 @@
+﻿<div id="user-options">
+    <AuthorizeView>
+        <Authorized>
+            <button id="triger-user-options" @onclick="()=> _showOptions = true">
+                @Layout.CurrentUser.Name
+                <Icon Name="Icons.IconUser" />
+            </button>
+            @if (_showOptions)
+            {
+                <UserFloatOptions Close="()=> _showOptions = false" />
+            }
+        </Authorized>
+        <NotAuthorized>
+            <NavLink href="/login">Log in</NavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>

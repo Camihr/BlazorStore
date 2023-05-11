@@ -1,0 +1,41 @@
+﻿@page "/register"
+@layout AuthLayout
+
+<EditForm Model="user" OnValidSubmit="RegisterUser" class="form-colum">
+    <h1>Registro</h1>
+    <DataAnnotationsValidator />
+    
+    <div class="item-form">
+        <Label>Nombre</Label>
+        <InputText @bind-Value="@user.Name" />
+        <ValidationMessage For="@(() => user.Name)" />
+    </div>
+    <div class="item-form">
+        <Label>Dirección</Label>
+        <InputText @bind-Value="@user.Address" />
+        <ValidationMessage For="@(() => user.Address)" />
+    </div>
+    <div class="item-form">
+        <Label>Teléfono</Label>
+        <InputText @bind-Value="@user.PhoneNumber" />
+        <ValidationMessage For="@(() => user.PhoneNumber)" />
+    </div>
+    <div class="item-form">
+        <Label>Correo electrónico</Label>
+        <InputText @bind-Value="@user.Email" />
+        <ValidationMessage For="@(() => user.Email)" />
+    </div>
+    <div class="item-form">
+        <Label>Documento de indentidad</Label>
+        <InputText @bind-Value="@user.Document" />
+        <ValidationMessage For="@(() => user.Document)" />
+    </div>
+    <div class="item-form">
+        <Label>Contraseña</Label>
+        <InputText type="password" @bind-Value="@user.Password" />
+        <ValidationMessage For="@(() => user.Password)" />
+    </div>
+    <br/>
+    <Button Style="Buttons.Secondary" IsSubmit="true" IsFull="true" title="Registrame" />
+    <NavLink href="/login">Ir al inicio de sesión</NavLink>
+</EditForm>

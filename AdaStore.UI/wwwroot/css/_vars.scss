@@ -1,0 +1,132 @@
+﻿/*Owner colors*/
+$primary: #002752;
+$secondary: #00aedb;
+$danger: #f25a4a;
+$success: #25d789;
+$cancel: #f2f2f2;
+$advertence: #FFC94C;
+$bg-brand: $primary;
+$bg-nav: $primary;
+$dark: rgba(0,0,0,.05);
+$light: rgba(255,255,255,1);
+
+$gray1: #666;
+$gray2: #B3B3B3;
+$gray3: #e6e6e6;
+$gray4: #F2F2F2;
+$gray5: #999999;
+
+/*Devices*/
+$mobile-width: 400px;
+$middle-width: 600px;
+$tablet-width: 800px;
+$desktop-width: 1300px;
+
+/*Font*/
+$font-family: 'Quicksand', sans-serif;
+
+/*Sides sideBar*/
+$expand: 200px;
+$no-expand: 60px;
+
+$radius: 3px;
+
+/*General shadow box*/
+$shadow: 2px 2px 0px 0px rgba(0,0,0,.1);
+
+
+//Flex rows ===============
+@mixin flex-center-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-end-center {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+@mixin flex-start-center {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@mixin flex-end-center {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+@mixin flex-spaceb-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+//Flex columns ===============
+@mixin flex-column-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin flex-column-start {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+}
+
+@mixin flex-column-space {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+@mixin flex-colum-center-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-column-reverse-center {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+
+
+@mixin shadow {
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+@mixin mobile {
+    @media (max-width: #{$mobile-width}) {
+        @content;
+    }
+}
+
+@mixin middle {
+    @media (max-width: #{$middle-width}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: #{$tablet-width}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (max-width: #{$desktop-width}) {
+        @content;
+    }
+}
+

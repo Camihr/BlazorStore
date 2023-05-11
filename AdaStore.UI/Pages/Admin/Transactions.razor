@@ -1,0 +1,75 @@
+﻿@page "/admin/transactions"
+
+@if (_orders != null)
+{
+    <div class="top-options">
+        <Searcher PlaceHolder="Busca por # o por usuario" OnSubmit="Search" />
+    </div>
+
+    if (_orders.Any())
+    {
+        <div class="box">
+            <table class="table">
+                <thead>
+                    <tr>
+                        @foreach (var column in _columns)
+                        {
+                            <th class="@column.Style">
+                                @if (column.NotOrder)
+                                {
+                                    @column.DisplayName
+                                }
+                                else
+                                {
+                                    <button @onclick='(() => SetOrder(column))'>
+                                        @column.DisplayName
+                                    </button>
+                                }
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in _orders)
+                    {
+                        <tr>
+                            <td data-label="#:">@order.Id</td>
+                            <td data-label="Fecha:">@order.UpdatedAt.ToString("dd/MM/yyyy")</td>
+                            <td class="td-number" data-label="Total:">@order.Total.MoneyFormat()</td>
+                            <td class="td-secondary-icon" data-label="Detalle:">
+                                <button class="td-button" @onclick="()=> ViewOrderDetail(order)">
+                                    Ver
+                                </button>
+                            </td>
+                            <td class="td-secondary-icon" data-label="Usuario:">
+                                <button class="td-button" @onclick="()=> ViewUserDetail(order.User)">
+                                    @order.UserName
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="center-content">
+            <p>@_emptyMessage</p>
+        </div>
+    }
+}
+
+@if (_isUserDetailVisible)
+{
+    <Popup Title="Detalle de Usuario" MaxWidth="400" ClosePopup="()=> _isUserDetailVisible=false">
+        <UserDetail User="_selectedUser" />
+    </Popup>
+}
+
+@if (_isOrderDetailVisible)
+{
+    <Popup Title="Detalle de Orden" MaxWidth="1200" ClosePopup="()=> _isOrderDetailVisible=false">
+        <OrderDetail Order="_selectedOrder" />
+    </Popup>
+}

@@ -1,0 +1,40 @@
+﻿@import '../../wwwroot/css/_vars.scss';
+
+#order-detail {
+    .cart-item {
+        @include flex-spaceb-center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid $gray4;
+
+        .left-part {
+            @include flex-start-center;
+            gap: 15px;
+
+            .image-product {
+                width: 70px;
+                height: 70px;
+                background-repeat: no-repeat !important;
+                background-size: cover !important;
+                background-position: center !important;
+                border-radius: 3px;
+            }
+        }
+
+        .right-part {
+            text-align: right;
+        }
+    }
+
+    .footer-order {
+        display: flex;
+        justify-content: flex-end;
+
+        h2 {
+            font-size: 1.6rem;
+            color: $success;
+        }
+    }
+}

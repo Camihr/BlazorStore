@@ -1,0 +1,182 @@
+﻿@import '_vars.scss';
+
+form {
+    width: 100%;
+}
+
+input,
+textarea,
+select,
+.input-file {
+    height: 32px;
+    padding: 0 10px;
+    background-color: #fff;
+    border: 1px solid $gray3;
+    box-sizing: border-box;
+    width: 100%;
+    color: $gray1;
+    font-size: 1rem;
+    border-radius: $radius;
+    font-display: $font-family;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &::placeholder {
+        color: $gray2;
+    }
+
+    &:disabled, &.disabled {
+        background: $gray2;
+    }
+}
+
+.input {
+    padding-top: 9px;
+}
+
+
+textarea {
+    min-height: 65px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid $secondary;
+    outline: 0;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+    pointer-events: none !important;
+    background: $gray4;
+}
+
+.validation-message, .field-validation-error, .validation-summary-errors li {
+    color: $danger;
+    font-size: .9rem;
+    display: block;
+    margin-top: 5px;
+}
+
+
+.label-before-check {
+    width: 100%;
+    cursor: pointer;
+    @include flex-spaceb-center;
+    border-bottom: 1px solid $gray4;
+    padding-bottom: 7px;
+}
+
+.label-after-check {
+    width: 100%;
+    cursor: pointer;
+    gap: 10px;
+    @include flex-start-center;
+}
+
+.label-only-check {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    @include flex-center-center;
+    inset-inline: 0;
+    padding: 0;
+    margin: 0;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    height: 16px;
+    width: 16px;
+    webkit-appearance: inherit !important;
+    -moz-appearance: inherit !important;
+    appearance: inherit !important;
+    background: #fff;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid $gray3;
+
+    &::after {
+        content: '';
+        background: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        width: 8px;
+        height: 8px;
+    }
+
+    &:focus {
+        outline: 0;
+        border: 2px solid $gray3;
+    }
+
+    &:checked {
+        &::after {
+            background: $secondary;
+        }
+    }
+}
+
+input[type="radio"] {
+    border-radius: 10px;
+
+    &::after {
+        border-radius: 5px;
+    }
+}
+
+.input-file {
+    cursor: pointer;
+    position: relative;
+    line-height: 1.6rem;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 11px;
+        width: 11px;
+        top: 11px;
+        right: 5px;
+        background: url(../../img/input_arrow.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    input {
+        display: none;
+    }
+}
+
+.form-colum {
+    width: 100%;
+    @include flex-colum-center-center;
+    gap: 10px;
+
+    >div{
+        width: 100%;
+    }
+}
+
+.item-form {
+    width: 100%;
+    @include flex-column-start;
+    gap: 5px;
+}
+
+.footer-form {
+    width: 100%;
+    @include flex-end-center;
+    gap: 10px;
+}

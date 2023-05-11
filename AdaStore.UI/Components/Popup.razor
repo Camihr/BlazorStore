@@ -1,0 +1,24 @@
+﻿<div class="over-close" @onclick="ClosePopup"></div>
+<div class="popup" style="max-width: @_maxWidth">
+    <div class="popup-header">
+        <h3>@Title</h3>
+        <Icon Name="Icons.Cancel" Click="ClosePopup" />
+    </div>
+    <div class="popup-body">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public int MaxWidth { get; set; }
+    [Parameter] public EventCallback ClosePopup { get; set; }
+
+    private string _maxWidth;
+
+    protected override void OnInitialized()
+    {
+        _maxWidth = MaxWidth > 0 ? $"{MaxWidth}px" : "900px";
+    }
+}

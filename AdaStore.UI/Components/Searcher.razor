@@ -1,0 +1,16 @@
+﻿<div class="searcher">
+    <input type="text" @bind="TextSearch" @bind:event="oninput" placeholder="@PlaceHolder" />
+    <Icon Name="Icons.IconSearch" />
+</div>
+
+@code {
+    private string textSearch;
+    public string TextSearch
+    {
+        get { return textSearch; }
+        set { textSearch = value; OnSubmit.InvokeAsync(value); }
+    }
+
+    [Parameter] public string PlaceHolder { get; set; }
+    [Parameter] public EventCallback<string> OnSubmit { get; set; }
+}

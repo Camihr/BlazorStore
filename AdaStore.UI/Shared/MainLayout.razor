@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>AdaStore | @_title</PageTitle>
+
+<CascadingValue Value="this">
+    <HeaderBar Title="@_title" QuantityItems="_quantityItems" />
+    <main id="main">
+        <NavMenu IsMenuClosed="@IsMenuClosed" />
+        <div id="wrapper">
+            @Body
+        </div>
+    </main>
+</CascadingValue>
+
+@if (_showLoading)
+{
+    <Loader />
+}
+@if (_showAlert)
+{
+    <Alert Info="_alertInfo" Close="()=> _showAlert = false" />
+}

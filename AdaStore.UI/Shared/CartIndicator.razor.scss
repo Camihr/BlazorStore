@@ -1,0 +1,28 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+#cart-indicator {
+    position: relative;
+
+    .quantity-items {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        @include flex-center-center;
+        background: $success;
+        color: white;
+        font-size: .8rem;
+        top: -6px;
+        right: -10px;
+        border-radius: 50%;
+    }
+
+    ::deep svg {
+        width: 22px;
+        height: 22px;
+        fill: $secondary;
+    }
+
+    &.pointer {
+        cursor: pointer;
+    }
+}

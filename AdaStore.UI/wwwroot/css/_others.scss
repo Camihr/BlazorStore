@@ -1,0 +1,96 @@
+﻿@import '_vars.scss';
+
+.top-options {
+    @include flex-spaceb-center;
+    margin-bottom: 10px;
+    gap: 10px;
+
+    > div {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+.over-close {
+    position: fixed;
+    z-index: 20;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.center-content {
+    @include flex-center-center
+}
+
+.max-300 {
+    max-width: 300px;
+}
+
+.max-360 {
+    max-width: 360px;
+}
+
+.max-600 {
+    max-width: 600px;
+}
+
+
+.max-900 {
+    max-width: 900px;
+}
+
+.full {
+    width: 100%;
+}
+
+.box {
+    border-radius: $radius;
+    background: #fff;
+    padding: 20px;
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.space-befor-footer{
+    height: 60px;
+}
+
+#fixed-footer-options {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - #{$expand});
+    background: #fff;
+    height: 50px;
+    box-shadow: 0px 2px 10px 0 rgba(0,0,0,0.3);
+    @include flex-center-center;
+    gap: 10px;
+    z-index: 5;
+    /*transition: ease-in-out .2s;*/
+
+    &.footer-expanded {
+        width: calc(100% - #{$no-expand});
+    }
+
+    @include tablet {
+        width: 100%;
+
+        &.footer-expanded {
+            width: 100%;
+        }
+    }
+}
+
+.info-message{
+    padding: 5px 0;
+    background: white;
+    border-radius: 4px;
+    border: solid 1px $secondary;
+    @include flex-center-center;
+    color: $secondary;
+}

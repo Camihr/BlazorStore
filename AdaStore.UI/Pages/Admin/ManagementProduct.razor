@@ -1,0 +1,38 @@
+﻿<EditForm Model="Product" OnValidSubmit="Save" class="form-colum">
+    <DataAnnotationsValidator />
+    <div class="item-form">
+        <Label>Nombre</Label>
+        <InputText @bind-Value="@Product.Name" />
+        <ValidationMessage For="@(() => Product.Name)" />
+    </div>
+     <div class="item-form">
+        <Label>Descripción</Label>
+        <InputTextArea @bind-Value="@Product.Description" ></InputTextArea>
+        <ValidationMessage For="@(() => Product.Description)" />
+    </div>
+     <div class="item-form">
+        <Label>Stock</Label>
+        <InputNumber @bind-Value="@Product.Stock" />
+        <ValidationMessage For="@(() => Product.Stock)" />
+    </div>
+    <div class="item-form">
+        <Label>Precio</Label>
+        <InputNumber @bind-Value="@Product.Price" />
+        <ValidationMessage For="@(() => Product.Price)" />
+    </div>
+    <div class="item-form">
+        <Label>Url de la imagen</Label>
+        <InputText @bind-Value="@Product.ImageUrl" />
+        <ValidationMessage For="@(() => Product.ImageUrl)" />
+    </div>
+    <div class="footer-form">
+        <Button Style="Buttons.Default" Click="Cancel"  Title="Cancelar" />
+        <Button Style="Buttons.Secondary" IsSubmit="true" Title="Guardar" />
+    </div>
+</EditForm>
+
+@code {
+    [Parameter] public Product Product { get; set; }
+    [Parameter] public EventCallback Save { get; set; }
+    [Parameter] public EventCallback Cancel { get; set; }
+}

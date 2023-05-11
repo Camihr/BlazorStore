@@ -1,0 +1,48 @@
+﻿@inject NavigationManager Navigation
+@inject IOrdersRepository OrdersRepository
+
+<div id="cart-indicator" class="@_style" @onclick="NavigateToCart">
+    @if (QuantityItems > 0)
+    {
+        <div class="quantity-items">@QuantityItems</div>
+    }
+    <Icon Name="Icons.Cart" />
+</div>
+
+@code {
+    [Parameter] public int QuantityItems { get; set; }
+    [CascadingParameter] public MainLayout Layout { get; set; }
+    private string _style;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await GetQuantityCartItem();
+    }
+
+    private async Task GetQuantityCartItem()
+    {
+        var response = await OrdersRepository.GetQuantityCartItem(Layout.CurrentUser.Id);
+
+        if (response.IsSuccess)
+        {
+            Layout.SetQuantityItems(response.Data, QuantityOperations.Set);
+        }
+        else
+        {
+            Layout.ShowAlert(await response.GetErrorMessage(), true);
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        _style = QuantityItems > 0 ? "pointer" : string.Empty;
+        StateHasChanged();
+    }
+
+    private void NavigateToCart()
+    {
+        if (QuantityItems < 1) return;
+        Navigation.NavigateTo("/cart");
+    }
+}

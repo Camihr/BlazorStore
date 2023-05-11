@@ -1,0 +1,112 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+header {
+    height: 50px;
+    min-height: 50px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    color: $primary;
+    position: sticky !important;
+    z-index: 4;
+    -webkit-box-shadow: 0px 3px 12px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 12px 0px rgba(0,0,0,0.2);
+
+    ::deep svg {
+        fill: $secondary;
+    }
+
+    #title {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        ::deep #logo {
+            width: $expand;
+            height: 100%;
+            background: url(../img/logo.png) no-repeat center center $bg-brand;
+            display: block;
+
+            &.logo-min {
+                width: $no-expand;
+                background: url(../img/icono.png) no-repeat center center $bg-brand;
+                /*transition: all ease-in-out .1s;*/
+            }
+        }
+
+        a, button {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        h1 {
+            font-size: 1.3rem;
+        }
+    }
+
+    #header-options {
+        padding-right: 20px;
+        @include flex-end-center;
+        height: 100%;
+        gap: 15px;       
+    }
+
+    @include tablet {
+
+        #title {
+            gap: 10px;
+
+            ::deep #logo {
+                width: $no-expand;
+                background: url(../img/icono.png) no-repeat center center $bg-brand;
+            }
+
+            a, button {
+                width: 18px;
+            }
+        }
+
+        #user-options {
+            gap: 5px;
+            padding-right: 15px;
+
+            #header-notifications {
+                width: 30px;
+
+                img {
+                    width: 26px;
+                }
+
+                span {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+
+    @include mobile {
+
+        #title {
+            padding-left: 15px;
+
+            h1 {
+                word-break: break-all;
+            }
+
+            ::deep #logo {
+                display: none;
+            }
+        }
+
+        #user-options {
+            width: 100px;
+        }
+    }
+}

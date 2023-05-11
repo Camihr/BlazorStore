@@ -1,0 +1,71 @@
+﻿@page "/admin/products"
+
+@if (_products != null)
+{
+    <div class="top-options">
+        <Searcher PlaceHolder="Busca por nombre" OnSubmit="Search" />
+        <Button Title="Crear producto" Style="Buttons.Secondary" Click="()=>OpenManagementProduct(null)" />
+    </div>
+
+    if (_products.Any())
+    {
+        <div class="box">
+            <table class="table">
+                <thead>
+                    <tr>
+                        @foreach (var column in _columns)
+                        {
+                            <th class="@column.Style">
+                                @if (column.NotOrder)
+                                {
+                                    @column.DisplayName
+                                }
+                                else
+                                {
+                                    <button @onclick='(() => SetOrder(column))'>
+                                        @column.DisplayName
+                                    </button>
+                                }
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pro in _products)
+                    {
+                        <tr>
+                            <td data-label="Imagen">
+                                <div class="image-product" style="background-image: url(@pro.ImageUrl);"></div>
+                            </td>
+                            <td data-label="Nombre:">@pro.Name</td>
+                            <td class="td-number" data-label="Stock">@pro.Stock</td>
+                            <td class="td-number" data-label="Precio">@pro.Price.MoneyFormat()</td>
+                            <td class="td-secondary-icon" data-label="Detalle:">
+                                <button class="td-button" @onclick="()=>OpenManagementProduct(pro)">
+                                    Editar
+                                </button>
+                            </td> <td class="td-secondary-icon" data-label="Detalle:">
+                                <button class="td-button td-btn-danger" @onclick="()=>DeleteProduct(pro)">
+                                    Borrar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="center-content">
+            <p>@_emptyMessage</p>
+        </div>
+    }
+}
+
+@if (_isManagementVisible)
+{
+    <Popup Title="Gestión de Producto" ClosePopup="()=> _isManagementVisible = false" MaxWidth="600">
+        <ManagementProduct Product="_selectedProduct" Cancel="()=> _isManagementVisible = false" Save="SaveProduct" />
+    </Popup>
+}

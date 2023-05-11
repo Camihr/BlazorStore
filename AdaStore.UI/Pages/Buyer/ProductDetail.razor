@@ -1,0 +1,40 @@
+﻿<div id="product-detail">
+    <div class="product-detail-header">
+        <div class="image-product-detail" style="background-image: url(@Product.ImageUrl);"></div>
+        <div class="main-product-info">
+            <h2>@Product.Name</h2>
+            <div class="product-values">
+                <h4>@Product.Price.MoneyFormat()</h4>
+                <p>@_stock</p>
+            </div>
+
+            @if (Product.Stock > 0)
+            {
+
+                <div class="product-detail-controls">
+                    <div class="quantity-modifier">
+                        <button @onclick="()=> ModifyQuantity(false)">
+                            <Icon Name="Icons.ArrowDown" />
+                        </button>
+
+                        <input type="number" @bind="_quantity" />
+
+                        <button @onclick="()=> ModifyQuantity(true)">
+                            <Icon Name="Icons.ArrowUp" />
+                        </button>
+                    </div>
+                    <button class="add-cart-button" @onclick="Add">
+                        <Icon Name="Icons.AddCart" />
+                    </button>
+                </div>
+                <br />
+                <span class="exhausted"> @_errorMessage</span>
+            }
+            else
+            {
+                <span class="exhausted">Agotado</span>
+            }
+        </div>
+    </div>
+    <p>@Product.Description</p>
+</div>

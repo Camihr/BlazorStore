@@ -1,0 +1,11 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+#user-options {
+    @include flex-end-center;
+    gap: 10px;
+
+    #triger-user-options {
+        @include flex-end-center;
+        gap: 10px;
+    }
+}

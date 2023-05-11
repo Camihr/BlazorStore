@@ -1,0 +1,60 @@
+﻿@import '../../wwwroot/css/_vars.scss';
+
+#order {
+    .cart-item {
+        @include flex-spaceb-center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid $gray4;
+
+        .left-part {
+            @include flex-start-center;
+            gap: 15px;
+
+            .image-product {
+                width: 100px;
+                height: 100px;
+                background-repeat: no-repeat !important;
+                background-size: cover !important;
+                background-position: center !important;
+                border-radius: 3px;
+            }
+        }
+
+        .right-part {
+            @include flex-end-center;
+            gap: 15px;
+
+            > div {
+                padding-right: 15px;
+                border-right: 1px solid $gray4;
+                text-align: right;
+            }
+
+            ::deep svg {
+                fill: $danger;
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .footer-order {
+        @include flex-spaceb-center;
+        gap: 10px;
+
+        h2 {
+            font-size: 1.6rem;
+            color: $success;
+            margin-right: 40px;
+        }
+
+        .confirm-buttons{
+            @include flex-spaceb-center;
+            gap: 12px;
+        }
+    }
+}

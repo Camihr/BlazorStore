@@ -1,0 +1,131 @@
+﻿@import '_vars.scss';
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+        padding: 5px;
+        border-right: 1px solid $gray4;
+        vertical-align: middle;
+    }
+
+    th {
+        font-weight: 700;
+        color: $primary;
+        font-size: 1rem;
+        text-align: left;
+
+        &.th-center {
+            text-align: center;
+        }
+
+        &.th-order {
+
+            button {
+                color: $primary;
+                cursor: pointer;
+                @include flex-spaceb-center;
+                line-height: 0;
+                font-weight: 700;
+                white-space: nowrap;
+                gap: 15px;
+                width: 100%;
+            }
+
+            &.order-disabled button::after {
+                content: url(../../img/order-disabled.png);
+                margin-left: 5px;
+            }
+
+            &.order-desc button::after {
+                content: url(../../img/order-desc.png);
+                margin-left: 5px;
+            }
+
+            &.order-asc button::after {
+                content: url(../../img/order-asc.png);
+                margin-left: 5px;
+            }
+        }
+    }
+
+    td {
+        border-top: 1px solid $gray4;
+        color: $gray1;
+
+        .td-button {
+            width: 100%;
+            height: 16px;
+            @include flex-center-center;
+            inset-inline: 0;
+            padding: 0;
+            margin: 0;
+            color: $secondary;
+
+            &.td-btn-danger {
+                color: $danger;
+            }
+        }
+
+        &.td-number {
+            text-align: right;
+        }
+
+        &.td-secondary-icon {
+            text-align: center;
+
+            svg {
+                width: 12px;
+                height: 12px;
+                cursor: pointer;
+                fill: $secondary;
+            }
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            li {
+                line-height: 1.5rem;
+            }
+        }
+    }
+
+    th:last-child, td:last-child {
+        border-right: none;
+    }
+
+    @include middle {
+        thead {
+            display: none;
+        }
+
+        tr {
+            .th-center {
+                text-align: left;
+            }
+
+            td {
+                display: inline-block;
+                width: 100%;
+
+                &.td-number, &.td-secondary-icon {
+                    text-align: left;
+                }
+
+                &::before {
+                    content: attr(data-label);
+                    font-weight: 600;
+                    margin-right: 7px;
+                }
+
+                &:first-child {
+                    border-top: 2px solid $primary;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,106 @@
+﻿@import '../../wwwroot/css/_vars.scss';
+
+#product-detail {
+    padding: 15px;
+    position: relative;
+
+    .close-detail {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        @include flex-center-center;
+        background: $gray3;
+        border-radius: 50%;
+    }
+
+    .product-detail-header {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+
+        .image-product-detail {
+            border-radius: 3px;
+            width: 48%;
+            min-width: 200px;
+            height: 300px;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            background-position: center !important;
+        }
+
+        .main-product-info {
+            width: 48%;
+            min-width: 200px;
+
+            h2 {
+                margin: 0;
+            }
+
+            .product-values {
+                @include flex-spaceb-center;
+                border-top: 1px solid $gray4;
+                border-bottom: 1px solid $gray4;
+                margin: 10px 0;
+            }
+
+            .product-detail-controls {
+                @include flex-spaceb-center;
+                gap: 10px;
+
+                .quantity-modifier {
+                    @include flex-center-center;
+                    height: 36px;
+                    gap: 10px;
+
+                    button {
+                        height: 100%;
+                        @include flex-center-center;
+                        width: 40px;
+                        background: $primary;
+                        border-radius: 3px;
+
+                        ::deep svg {
+                            width: 12px;
+                            height: 12px;
+                            fill: white
+                        }
+                    }
+
+                    input {
+                        height: 36px;
+                        width: 80px;
+                    }
+                }
+
+                .add-cart-button {
+                    @include flex-center-center;
+                    width: 40px;
+                    height: 36px;
+                    background: $success;
+                    border-radius: 3px;
+
+                    ::deep svg {
+                        width: 20px;
+                        height: 20px;
+                        fill: white;
+                    }
+                }
+            }
+
+            .error-message {
+                width: 100%;
+                border: 1px solid $danger;
+                border-radius: 2px;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .exhausted {
+                color: $danger;
+                font-weight: 700;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+.searcher {
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+
+    input {
+        border: none;
+        -webkit-box-shadow: 2px 2px 0px 0px $gray3;
+        box-shadow: 2px 2px 0px 0px $gray3;
+    }
+
+    ::deep svg {
+        position: absolute;
+        z-index: 1;
+        right: 10px;
+        top: 8px;
+        width: 16px;
+        height: 16px;
+        fill: $secondary;
+    }
+}

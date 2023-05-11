@@ -1,0 +1,78 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+.over-close{
+    background: $primary;
+    opacity: .8;
+}
+
+.popup {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 30;
+    background: white;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: auto;
+    max-width: 100%;
+    height: fit-content;
+
+    .popup-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: $primary;
+        height: 36px;
+        padding: 0 15px;
+
+        h3 {
+            color: #fff;
+        }
+
+        ::deep svg {
+            width: 14px;
+            height: 14px;
+            fill: white;
+            cursor: pointer;
+        }
+    }
+
+    .popup-body {
+        padding: 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .popup-footer {
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    @include mobile {
+        align-items: start;
+        padding-top: 20px;
+        overflow-y: auto;
+
+        .popup-body {
+            max-height: 100%;
+            height: fit-content;
+            overflow-y: hidden !important;
+        }
+
+        .popup-footer {
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+
+            .btn {
+                width: 80%;
+            }
+        }
+    }
+}

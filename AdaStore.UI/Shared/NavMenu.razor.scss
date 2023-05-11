@@ -1,0 +1,88 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+#nav {
+    max-width: $expand;
+    width: 100%;
+    background: $bg-nav;
+    min-height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            ::deep a {
+                display: flex;
+                align-items: center;
+                padding: 10px 15px;
+                gap: 10px;
+                transition: ease-in-out all .1s;
+                color: rgba(255, 255, 255, .8);
+
+                svg {
+                    width: 26px;
+                    height: 26px;
+                    fill: $secondary;
+                }
+
+                &:hover, &.active {
+                    background: rgb(0,174,219);
+                    background: linear-gradient(90deg, rgba(0,174,219,1) 0%, rgba(0,91,135,1) 100%);
+                    color: #fff;
+
+                    svg {
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    &.nav-min {
+        width: $no-expand;
+        /*transition: all ease-in-out .1s;*/
+
+        ul {
+            li {
+                a {
+                    span {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-logo {
+        max-width: 120px;
+        width: 80%;
+        margin: 20px auto;
+    }
+
+    @include tablet {
+        display: none;
+
+        &.nav-min {
+            width: $expand;
+            position: absolute;
+            z-index: 7;
+            display: block;
+
+            ul {
+                li {
+                    a {
+
+                        span {
+                            display: initial;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

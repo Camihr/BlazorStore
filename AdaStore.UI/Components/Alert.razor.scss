@@ -1,0 +1,67 @@
+﻿@import '../wwwroot/css/_vars.scss';
+
+#alert {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid $gray3;
+    background: white;
+    width: calc(100% - 40px);
+    max-width: 400px;
+    height: fit-content;
+    @include shadow;
+    animation: growPopup .1s ease-out;
+
+    p {
+        text-align: center;
+    }
+
+    &.alert-error {
+        border-color: $danger;
+
+        p {
+            color: $danger;
+        }
+    }
+
+    &.alert-success {
+        border-color: $success;
+
+        p {
+            color: $success;
+        }
+    }
+
+    ::deep svg {
+        cursor: pointer;
+        width: 10px;
+        height: 10px;
+        fill: #ccc;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+}
+
+
+@keyframes growPopup {
+
+    0% {
+        transform: scale(.6);
+        opacity: 0;
+    }
+
+    70% {
+        opacity: 100%;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

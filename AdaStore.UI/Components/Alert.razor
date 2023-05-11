@@ -1,0 +1,15 @@
+﻿<div id="alert" class='@(Info.IsError ? "alert-error" : "alert-success") box animate__animated  animate__fadeInUp'
+    <Icon Name="Icons.Cancel" Click="Close"/>
+    <p>@Info.Message</p>
+</div>
+
+@code {
+    [Parameter] public EventCallback Close { get; set; }
+    [Parameter] public AlertInfo Info { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(3000);
+        await Close.InvokeAsync();
+    }
+}

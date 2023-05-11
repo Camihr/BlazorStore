@@ -1,0 +1,50 @@
+﻿@page "/cart"
+
+<div id="order" class="box">
+    @if (_order != null)
+    {
+        foreach (var item in _order.CartItems)
+        {
+            <div class="cart-item">
+                <div class="left-part">
+                    <div class="image-product" style="background-image: url(@item.Product.ImageUrl);"></div>
+                    <p>@item.Product.Name</p>
+                </div>
+                <div class="right-part">
+                    <div>
+                        <p>@item.Quantity x  @item.Product.Price.MoneyFormat()</p>
+                        <h4>@item.Total.MoneyFormat()</h4>
+                    </div>
+                    <Icon Name="Icons.Cancel" Click="()=> RemoveCartItem(item)" />
+                </div>
+            </div>
+        }
+        <div class="footer-order">
+            <div class="confirm-buttons">
+                <Button Title="Cancelar orden" Style="Buttons.Danger"
+                    Click="()=> {_isBuying = false; _isConfirmVisible = true;}" />
+
+                <Button Title="Comprar" Style="Buttons.Secondary"
+                    Click="()=> {_isBuying = true; _isConfirmVisible = true;}" />
+            </div>
+            <h2>@_order.Total.MoneyFormat()</h2>
+        </div>
+    }
+</div>
+
+@if (_isConfirmVisible)
+{
+    <Popup Title="Confirmación" ClosePopup="()=>_isConfirmVisible = false" MaxWidth="400">
+        @if (_isBuying)
+        {
+            <p>Confirma la compra de estos productos</p>
+        }
+        else
+        {
+            <p>Confirma la cancelación de la orden</p>
+        }
+        <div class="footer-form">
+            <Button Title="Confirmar" Style="Buttons.Secondary" Click="Confirm" />
+        </div>
+    </Popup>
+}
