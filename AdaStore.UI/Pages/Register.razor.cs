@@ -1,10 +1,9 @@
 ﻿using AdaStore.Shared.DTOs;
-using AdaStore.Shared.Enums;
-using AdaStore.Shared.Models;
 using AdaStore.UI.Interfaces;
 using AdaStore.UI.Shared;
 using AdaStore.UI.UI;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 namespace AdaStore.UI.Pages
 {
@@ -12,6 +11,7 @@ namespace AdaStore.UI.Pages
     {
         [Inject] IUsersRepository UsersRepository { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
+        [Inject] ProtectedSessionStorage SessionStorage { get; set; }
         [CascadingParameter] public AuthLayout Layout { get; set; }
 
         private UserRegister user = new UserRegister();
@@ -24,7 +24,10 @@ namespace AdaStore.UI.Pages
 
             if (response.IsSuccess)
             {
-                Navigation.NavigateTo("/login", true);
+                var auth = response.Data;
+                await SessionStorage.SetAsync("AuthorizationToken", auth.Token);
+
+                Navigation.NavigateTo("/", true);
             }
             else
             {

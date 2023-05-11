@@ -1,5 +1,24 @@
-﻿<h3>Login</h3>
+﻿@page "/login"
+@layout AuthLayout
 
-@code {
-
-}
+<EditForm Model="user" OnValidSubmit="LoginUser" class="form-colum">
+    <h1>Login</h1>
+    <DataAnnotationsValidator />
+    <div class="item-form">
+        <Label>Correo electrónico</Label>
+        <InputText @bind-Value="@user.Email" />
+        <ValidationMessage For="@(() => user.Email)" />
+    </div>
+    <div class="item-form">
+        <Label>Contraseña</Label>
+        <InputText type="password" @bind-Value="@user.Password" />
+        <ValidationMessage For="@(() => user.Password)" />
+    </div>
+     <div class="item-form">
+        <Label>¿Quiere conservar la sesión activa?</Label>
+        <InputCheckbox @bind-Value="@user.IsPersistent" />
+    </div>
+    <br/>
+    <Button Style="Buttons.Secondary" IsSubmit="true" IsFull="true" title="Iniciar sesión" />
+    <NavLink href="/register">Ir al registro</NavLink>
+</EditForm>

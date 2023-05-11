@@ -1,7 +1,5 @@
 ﻿using AdaStore.Shared.Models;
 using AdaStore.UI.Interfaces;
-using Azure;
-using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 
 namespace AdaStore.UI.Repositories

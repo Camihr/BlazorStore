@@ -74,7 +74,8 @@ namespace AdaStore.Api.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(GenerateTokenAuth(new UserClaims() { Email = credential.Email }));
+                var authResponse = GenerateTokenAuth(new UserClaims() { Email = credential.Email });
+                return Ok(authResponse);
             }
             else
             {
