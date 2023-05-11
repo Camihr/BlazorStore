@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdaStore.Shared.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230414063159_AddRelationBeteweenUserOrder")]
-    partial class AddRelationBeteweenUserOrder
+    [Migration("20230511015848_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,10 +1,12 @@
-﻿using AdaStore.Shared.Models;
+﻿using AdaStore.Shared.DTOs;
+using AdaStore.Shared.Models;
 using AdaStore.UI.Repositories;
 
 namespace AdaStore.UI.Interfaces
 {
     public interface IUsersRepository
     {
-        Task<HttpResponseBase<object>> RegisterUser(User userRequest);
+        Task<HttpResponseBase<AuthResponse>> RegisterUser(UserRegister user);
+        Task<HttpResponseBase<AuthResponse>> Login(LoginCredentials user);
     }
 }

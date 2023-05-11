@@ -1,4 +1,6 @@
-﻿namespace AdaStore.Shared.Models
+﻿using System;
+
+namespace AdaStore.Shared.Models
 {
     public class ModelBase
     {

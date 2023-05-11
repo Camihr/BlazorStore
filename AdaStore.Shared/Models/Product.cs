@@ -15,11 +15,11 @@ namespace AdaStore.Shared.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
-        [Range(0, int.MaxValue, ErrorMessage = "La cantidad mínima es 0")]
+        [Range(0, 100000000, ErrorMessage = "La cantidad debe ser entre 0 y 100000000")]
         public int Stock { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
-        [Range(0, int.MaxValue, ErrorMessage = "La cantidad mínima es 0")]
+        [Range(0, 100000000, ErrorMessage = "El precio debe ser entre 0 y 100000000")]
         public double Price { get; set; }
 
         public string ImageUrl { get; set; }

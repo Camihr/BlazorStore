@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdaStore.Shared.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230414060251_AddImageUrlToProducts")]
-    partial class AddImageUrlToProducts
+    [Migration("20230511020753_InsertSomeProducts")]
+    partial class InsertSomeProducts
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

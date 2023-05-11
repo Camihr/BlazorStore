@@ -1,4 +1,5 @@
 ﻿using AdaStore.Shared.Data;
+using AdaStore.Shared.DTOs;
 using AdaStore.Shared.Models;
 using AdaStore.UI.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -31,14 +32,14 @@ namespace AdaStore.UI.Repositories
             _apiUrl = configuration.GetValue<string>("ApiUrl");
         }
 
-        public async Task<HttpResponseBase<object>> RegisterUser(User user)
+        public async Task<HttpResponseBase<AuthResponse>> RegisterUser(UserRegister user)
         {
             try
             {
                 var url = $"{_apiUrl}Account/Register";
                 var httpResponse = await httpClientService.Post(url, user);
 
-                return new HttpResponseBase<object>()
+                return new HttpResponseBase<AuthResponse>()
                 {
                     IsSuccess = httpResponse.IsSuccessStatusCode,
                     Response = httpResponse
@@ -46,7 +47,26 @@ namespace AdaStore.UI.Repositories
             }
             catch (Exception)
             {
-                return new HttpResponseBase<object>() { IsSuccess = false};
+                return new HttpResponseBase<AuthResponse>() { IsSuccess = false};
+            }
+        }
+
+        public async Task<HttpResponseBase<AuthResponse>> Login(LoginCredentials user)
+        {
+            try
+            {
+                var url = $"{_apiUrl}Account/Login";
+                var httpResponse = await httpClientService.Post(url, user);
+
+                return new HttpResponseBase<AuthResponse>()
+                {
+                    IsSuccess = httpResponse.IsSuccessStatusCode,
+                    Response = httpResponse
+                };
+            }
+            catch (Exception)
+            {
+                return new HttpResponseBase<AuthResponse>() { IsSuccess = false };
             }
         }
     }

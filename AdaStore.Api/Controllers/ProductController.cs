@@ -1,21 +1,22 @@
 ﻿using AdaStore.Shared.Data;
 using AdaStore.Shared.Enums;
 using AdaStore.Shared.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace AdaStore.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : Controller
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class ProductController : BaseController
     {
-        private readonly ApplicationDbContext context;
-
-        public ProductController(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
+        public ProductController(ApplicationDbContext context, IConfiguration configuration, UserManager<User> userManager) : base(context, configuration, userManager)
+        { }
 
         [HttpGet]
         public async Task<IActionResult> GetProducts()
@@ -25,8 +26,12 @@ namespace AdaStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct( [FromBody] Product product)
+        public async Task<IActionResult> CreateProduct([FromBody] Product product)
         {
+            var user = await GetUser();
+            if (user.Profile != Profiles.Admin)
+                return Forbid("No tienes autorización para esta operación");
+
             product.UpdatedAt = DateTime.UtcNow;
             product.CreatedAt = DateTime.UtcNow;
 
@@ -39,6 +44,10 @@ namespace AdaStore.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> EditProduct([FromBody] Product product)
         {
+            var user = await GetUser();
+            if (user.Profile != Profiles.Admin)
+                return Forbid("No tienes autorización para esta operación");
+
             var existingProduct = await context.Products.FindAsync(product.Id);
 
             if (existingProduct == null)
@@ -59,11 +68,15 @@ namespace AdaStore.Api.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeeteProduct([FromQuery] int productId)
         {
+            var user = await GetUser();
+            if (user.Profile != Profiles.Admin)
+                return Forbid("No tienes autorización para esta operación");
+
             var product = await context.Products.FindAsync(productId);
 
             if (product == null)
                 return BadRequest("El producto solicitado no existe");
-          
+
             product.IsDeleted = true;
             product.UpdatedAt = DateTime.UtcNow;
 

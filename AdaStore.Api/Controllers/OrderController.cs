@@ -1,6 +1,9 @@
 ﻿using AdaStore.Shared.Data;
 using AdaStore.Shared.Enums;
 using AdaStore.Shared.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -10,24 +13,24 @@ namespace AdaStore.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : Controller
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class OrderController : BaseController
     {
-        private readonly ApplicationDbContext context;
-        private readonly IConfiguration configuration;
 
-        public OrderController(ApplicationDbContext context, IConfiguration configuration)
-        {
-            this.context = context;
-            this.configuration = configuration;
-        }
+        public OrderController(ApplicationDbContext context, IConfiguration configuration, UserManager<User> userManager) : base (context, configuration, userManager)
+        {}
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("AddToCart")]
-        public async Task<IActionResult> AddToCart([FromQuery] int userId, [FromBody] CartItem item)
+        public async Task<IActionResult> AddToCart([FromBody] CartItem item)
         {
+            var email = User.Claims.Where(c => c.Type == "Email").FirstOrDefault();
+            var user = await userManager.FindByEmailAsync(email.Value);
+
             var order = await context.Orders
                 .Include(o => o.CartItems)
-                .FirstOrDefaultAsync(o => o.UserId == userId && o.Status == OrderStatuses.InProcess);
+                .FirstOrDefaultAsync(o => o.UserId == user.Id && o.Status == OrderStatuses.InProcess);
 
             var product = await context.Products.FindAsync(item.ProductId);
             product.Stock -= item.Quantity;
@@ -41,7 +44,7 @@ namespace AdaStore.Api.Controllers
                     {
                         CreatedAt = DateTime.UtcNow,
                         UpdatedAt = DateTime.UtcNow,
-                        UserId = userId,
+                        UserId = user.Id,
                         CartItems = new List<CartItem> { item }
                     };
 
@@ -74,11 +77,14 @@ namespace AdaStore.Api.Controllers
 
         [HttpGet]
         [Route("QuantityCartItem")]
-        public async Task<IActionResult> GetQuantityCartItem([FromQuery] int userId)
+        public async Task<IActionResult> GetQuantityCartItem()
         {
+            var email = User.Claims.Where(c => c.Type == "Email").FirstOrDefault();
+            var user = await userManager.FindByEmailAsync(email.Value);
+
             var order = await context.Orders
                .Include(o => o.CartItems)
-               .FirstOrDefaultAsync(o => o.UserId == userId && o.Status == OrderStatuses.InProcess);
+               .FirstOrDefaultAsync(o => o.UserId == user.Id && o.Status == OrderStatuses.InProcess);
 
             var quantity = 0;
 
@@ -89,12 +95,15 @@ namespace AdaStore.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCurrentOrder([FromQuery] int userId)
+        public async Task<IActionResult> GetCurrentOrder()
         {
+            var email = User.Claims.Where(c => c.Type == "Email").FirstOrDefault();
+            var user = await userManager.FindByEmailAsync(email.Value);
+
             var order = await context.Orders
                .Include(o => o.CartItems)
                .ThenInclude(o => o.Product)
-               .FirstOrDefaultAsync(o => o.UserId == userId && o.Status == OrderStatuses.InProcess);
+               .FirstOrDefaultAsync(o => o.UserId == user.Id && o.Status == OrderStatuses.InProcess);
 
             if (order == null)
                 return BadRequest("La orden solicitada no existe");

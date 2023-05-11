@@ -10,5 +10,10 @@
         //Roles
         public const string Admin = "Admin";
         public const string Buyer = "Buyer";
+
+        //Others
+        public const string Bearer = "Bearer";
+        public const string Authorization = "Authorization";
+        public const string JWT = "JWT";
     }
 }

@@ -1,12 +1,9 @@
-﻿using AdaStore.Shared.Enums;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AdaStore.Shared.Models
+namespace AdaStore.Shared.DTOs
 {
-    public class User : IdentityUser<int>
+    public class UserRegister
     {
         [Required(ErrorMessage = "Campo obligatorio")]
         [MaxLength(12, ErrorMessage = "12 caracteres máximo")]
@@ -28,10 +25,6 @@ namespace AdaStore.Shared.Models
         [Required(ErrorMessage = "Campo obligatorio")]
         [MaxLength(20, ErrorMessage = "20 caracteres máximo")]
         public string Document { get; set; }
-        public Profiles Profile { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public bool IsDeleted { get; set; }
 
         [NotMapped]
         [Required(ErrorMessage = "Campo obligatorio")]

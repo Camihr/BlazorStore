@@ -1,6 +1,4 @@
 ﻿using AdaStore.Shared.DTOs;
-using AdaStore.Shared.Enums;
-using AdaStore.Shared.Models;
 using AdaStore.UI.Interfaces;
 using AdaStore.UI.Shared;
 using AdaStore.UI.UI;
@@ -8,19 +6,19 @@ using Microsoft.AspNetCore.Components;
 
 namespace AdaStore.UI.Pages
 {
-    public partial class Register
+    public partial class Login
     {
         [Inject] IUsersRepository UsersRepository { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
         [CascadingParameter] public AuthLayout Layout { get; set; }
 
-        private UserRegister user = new UserRegister();
+        private LoginCredentials user = new LoginCredentials();
 
-        private async Task RegisterUser()
+        private async Task LoginUser()
         {
-            Layout.ToogleLoader(true);            
+            Layout.ToogleLoader(true);
 
-            var response = await UsersRepository.RegisterUser(user);
+            var response = await UsersRepository.Login(user);
 
             if (response.IsSuccess)
             {
